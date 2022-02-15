@@ -1,3 +1,5 @@
 *.ppm
 .DS_Store
 */exe/*
+*.lock
+*/target/*
