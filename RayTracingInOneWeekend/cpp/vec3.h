@@ -30,8 +30,8 @@ class vec3 {
         }
 
         double operator[](int i) const {
-             return e[i]; 
-            }
+            return e[i]; 
+        }
 
         double& operator[](int i) { 
             return e[i]; 

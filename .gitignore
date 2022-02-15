@@ -5,5 +5,5 @@ exe/
 
 
 # Rust
-/target/
+**/target/**
 Cargo.lock
