@@ -1,4 +1,11 @@
+mod vec3;
+use std::io::{self, Write};
+
 fn main() {
+
+    let c = vec3::Color::new(0.0,0.0,0.0);
+
+println!("{}", c.x());
     
     // Image
     let image_width = 256;
@@ -9,6 +16,9 @@ fn main() {
     println!("P3\n{w} {h}\n255", w = image_width, h = image_height);
 
     for j in (0..(image_height)).rev() {
+        eprint!("\rScanlines remaining: {} ", j);
+        io::stdout().flush().unwrap();
+
         for i in 0..(image_width) {
             let r = i as f64 / (image_width-1) as f64;
             let g = j as f64 / (image_height-1) as f64;
@@ -21,5 +31,5 @@ fn main() {
             println!("{} {} {}", ir, ig, ib);
         }
     }
-
+    eprint!("\nDone.\n");
 }
