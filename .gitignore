@@ -1,5 +1,9 @@
 *.ppm
 .DS_Store
-*/exe/*
-*.lock
-**/target/**
+exe/
+
+
+
+# Rust
+/target/
+Cargo.lock
