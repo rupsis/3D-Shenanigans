@@ -1,4 +1,6 @@
 mod vec3;
+mod color;
+
 use std::io::{self, Write};
 
 fn main() {
@@ -19,15 +21,13 @@ fn main() {
         io::stdout().flush().unwrap();
 
         for i in 0..(image_width) {
-            let r = i as f64 / (image_width - 1) as f64;
-            let g = j as f64 / (image_height - 1) as f64;
-            let b = 0.25;
+            let pixel_color = vec3::Color::new(
+                i as f64 / (image_width - 1) as f64,
+                j as f64 / (image_height - 1) as f64,
+                0.25
+            );
 
-            let ir = (255.999 * r) as i64;
-            let ig = (255.999 * g) as i64;
-            let ib = (255.999 * b) as i64;
-
-            println!("{} {} {}", ir, ig, ib);
+            color::write_color(pixel_color)
         }
     }
     eprint!("\nDone.\n");

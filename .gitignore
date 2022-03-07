@@ -7,3 +7,7 @@ exe/
 # Rust
 **/target/**
 Cargo.lock
+
+# IDE
+.metals
+.vscode
