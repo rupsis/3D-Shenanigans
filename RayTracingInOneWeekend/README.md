@@ -5,11 +5,15 @@ Following the wonderful tutorial: https://raytracing.github.io/books/RayTracingI
 
 (C++)
 ```c++
-// Compile
-g++ -std=c++11 hello_image.cpp -o render
+// executable directroy
 
-./render > image.ppm
+mkdir exe
+// Compile
+g++ -std=c++11 <file>.cpp -o exe/render
+
+./exe/render > image.ppm
 ```
+
 
 (Rust)
 ```rust
