@@ -1,24 +1,29 @@
 use std::ops;
 
-pub struct Vec3(f64, f64, f64);
+#[derive(Default)]
+pub struct Vec3 {
+    x: f64,
+    y: f64,
+    z: f64,
+}
 
 impl Vec3 {
-    pub fn default() -> Vec3 {
-        Vec3(0.0, 0.0, 0.0)
-    }
-
-    pub fn new(e0: f64, e1: f64, e2: f64) -> Vec3 {
-        Vec3(e0, e1, e2)
+    pub fn new(e0: f64, e1: f64, e2: f64) -> Self {
+        Self {
+            x: e0,
+            y: e1,
+            z: e2,
+        }
     }
 
     pub fn x(&self) -> f64 {
-        self.0
+        self.x
     }
     pub fn y(&self) -> f64 {
-        self.1
+        self.y
     }
     pub fn z(&self) -> f64 {
-        self.2
+        self.z
     }
 
     pub fn length(&self) -> f64 {
@@ -26,7 +31,7 @@ impl Vec3 {
     }
 
     pub fn length_squared(&self) -> f64 {
-        f64::powi(self.0, 2) + f64::powi(self.1, 2) + f64::powi(self.2, 2)
+        f64::powi(self.x, 2) + f64::powi(self.y, 2) + f64::powi(self.z, 2)
     }
 
     pub fn cross(&self, _rhs: Vec3) -> Vec3 {
@@ -100,14 +105,22 @@ impl ops::Div<f64> for Vec3 {
 // += operation
 impl ops::AddAssign for Vec3 {
     fn add_assign(&mut self, _rhs: Self) {
-        *self = Self(self.0 + _rhs.0, self.1 + _rhs.1, self.2 + _rhs.2)
+        *self = Self {
+            x: self.x + _rhs.x,
+            y: self.y + _rhs.y,
+            z: self.z + _rhs.z,
+        }
     }
 }
 
 // *= operation
 impl ops::MulAssign<f64> for Vec3 {
     fn mul_assign(&mut self, _rhs: f64) {
-        *self = Self(self.0 * _rhs, self.1 * _rhs, self.2 * _rhs)
+        *self = Self {
+            x: self.x * _rhs,
+            y: self.y * _rhs,
+            z: self.z * _rhs,
+        }
     }
 }
 
@@ -124,12 +137,12 @@ pub use Vec3 as Color;
 // Color utility methods
 impl Color {
     pub fn r(&self) -> f64 {
-        self.0
+        self.x
     }
     pub fn g(&self) -> f64 {
-        self.1
+        self.y
     }
     pub fn b(&self) -> f64 {
-        self.2
+        self.z
     }
 }

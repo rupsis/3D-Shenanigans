@@ -1,5 +1,5 @@
-mod vec3;
 mod color;
+mod vec3;
 
 use std::io::{self, Write};
 
@@ -24,7 +24,7 @@ fn main() {
             let pixel_color = vec3::Color::new(
                 i as f64 / (image_width - 1) as f64,
                 j as f64 / (image_height - 1) as f64,
-                0.25
+                0.25,
             );
 
             color::write_color(pixel_color)
