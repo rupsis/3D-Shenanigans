@@ -9,7 +9,10 @@ pub struct Ray {
 
 impl Ray {
     pub fn default() -> Ray {
-        Ray(Point3.default(), Vec3.default())
+        Ray{
+            orig: Point3.default(), 
+            dir: Vec3.default()
+        }
     }
 
     pub fn new(e0: Point3, e1: Vec3) -> Self {
@@ -28,7 +31,7 @@ impl Ray {
     }
 
     pub fn at(&self, t: f64) -> Point3 {
-        self.origin + (t * self.direction)
+        self.origin() + (t * self.direction())
     }
 
 }
