@@ -11,10 +11,11 @@ void write_color(std::ostream &out, color pixel_color, int samples_per_pixel) {
     auto g = pixel_color.g();
     auto b = pixel_color.b();
 
+    // Divide the color by the number of samples and gama-correct for gamma=2.0.
     auto scale = 1.0 / samples_per_pixel;
-    r *= scale;
-    g *= scale;
-    b *= scale;
+    r = sqrt(scale * r);
+    g = sqrt(scale * g);
+    b = sqrt(scale * b);
 
     // Update each pixel with intensity based on samples. But clamp at
     //  a range of 0 - 0.999
