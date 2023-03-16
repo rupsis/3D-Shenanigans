@@ -22,6 +22,11 @@ class camera {
             return ray(origin, lower_left_corner + (u*horizontal) + (v*vertical) - origin);
         }
 
+        // The camera is fixed, so just update the origin to move the scene around
+        void set_x_y(double x, double y){
+            origin = point3(x,y,0);
+        }
+
     private:
         point3 origin;
         point3 lower_left_corner;
