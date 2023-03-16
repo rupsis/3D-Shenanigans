@@ -37,31 +37,48 @@ int main() {
     const int image_height = static_cast<int>(image_width / aspect_ratio);
     const int samples_per_pixel = 100;
     const int max_depth = 50;
+    const point3 lookfrom = point3(3, 2, 3);
+    const point3 lookat = point3(0,-1,-0);
+    const vec3 vup = vec3(0,0,1);
+    auto dist_to_focus = (lookfrom - lookat).length();
+    auto aperture = 2.0;
+
 
     // World 
 
+    auto R = cos(pi/4);
     hittable_list world;
+
+     // color is in RGB
+    // auto material_left = make_shared<lambertian>(color(0.1, 0.1, 1));
+    // auto material_right = make_shared<lambertian>(color(1.0, 0.1, 0.1));
     
-    // color is in RGB
-    auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
-    auto material_center = make_shared<lambertian>(color(0.8, 0.392629, 0.0));
-    auto material_left = make_shared<dielectric>(1.5);
-    auto material_right = make_shared<metal>(color(0.8, 0.8, 0.2), 1.0);
+   
+
 
     // remember we're a Y up application
 
     
-    world.add(make_shared<sphere>(point3(0, -1, -100.5), 100, material_ground));
+    // world.add(make_shared<sphere>(point3(0, -1, -100.5), 100, material_ground));
 
-    // adding in spheres, center, left, right
-    world.add(make_shared<sphere>(point3(0,-1,0), 0.5, material_center));
-    world.add(make_shared<sphere>(point3(-1.0,-1,0), 0.5, material_left));
-    world.add(make_shared<sphere>(point3(-1.0,-1,0), -0.5, material_left));
-    world.add(make_shared<sphere>(point3(1.0,-1,0), 0.5, material_right));
+    // adding in spheres,  left, right
+    // world.add(make_shared<sphere>(point3(-R,-1,0), R, material_left));
+    // world.add(make_shared<sphere>(point3(R,-1,0), R, material_right));
     
 
+    auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
+auto material_center = make_shared<lambertian>(color(0.1, 0.2, 0.5));
+auto material_left   = make_shared<dielectric>(1.5);
+auto material_right  = make_shared<metal>(color(0.8, 0.6, 0.2), 0.0);
+
+world.add(make_shared<sphere>(point3( 0.0, -1.0, -100.5), 100.0, material_ground));
+world.add(make_shared<sphere>(point3( 0.0, -1.0, 0.0),   0.5, material_center));
+world.add(make_shared<sphere>(point3(-1.0, -1.0, 0.0),   0.5, material_left));
+world.add(make_shared<sphere>(point3(-1.0, -1.0, 0.0), -0.45, material_left));
+world.add(make_shared<sphere>(point3( 1.0, -1.0, 0.0),   0.5, material_right));
+
     // Camera 
-    camera cam;
+    camera cam(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus);
 
 
     // Animation loop
