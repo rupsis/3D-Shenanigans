@@ -11,3 +11,5 @@ Cargo.lock
 # IDE
 .metals
 .vscode
+
+**/image_ppm/**

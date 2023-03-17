@@ -1,6 +1,9 @@
 # Ray Tracing in One Weekend
 Following the wonderful tutorial: https://raytracing.github.io/books/RayTracingInOneWeekend.html
 
+Final image:
+![image](./cpp/images/final_image.png)
+
 ## Basic image
 
 (C++)

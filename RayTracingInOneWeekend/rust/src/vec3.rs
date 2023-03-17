@@ -1,6 +1,6 @@
 use std::ops;
 
-#[derive(Default)]
+#[derive(Default, Clone, Copy)]
 pub struct Vec3 {
     x: f64,
     y: f64,
@@ -86,10 +86,26 @@ impl ops::Neg for Vec3 {
 
 // * (multiply) operation
 impl ops::Mul<f64> for Vec3 {
-    type Output = Self;
+    type Output = Vec3;
 
     fn mul(self, _rhs: f64) -> Vec3 {
-        Vec3::new(self.x() * _rhs, self.y() * _rhs, self.z() * _rhs)
+        Vec3 {
+            x: self.x() * _rhs,
+            y: self.y() * _rhs,
+            z: self.z() * _rhs,
+        }
+    }
+}
+
+impl ops::Mul<Vec3> for f64 {
+    type Output = Vec3;
+
+    fn mul(self, _rhs: Vec3) -> Vec3 {
+        Vec3 {
+            x: self * _rhs.x(),
+            y: self * _rhs.y(),
+            z: self * _rhs.z(),
+        }
     }
 }
 
@@ -145,4 +161,8 @@ impl Color {
     pub fn b(&self) -> f64 {
         self.z
     }
+}
+
+pub fn unit_vector(v: Vec3) -> Vec3 {
+    v / v.length()
 }
